@@ -41,7 +41,7 @@ with open('./keylist.txt', 'a') as key_list:
                     try:
                         key = network.parse.private_key(code)
                         req = requests.get('https://blockchain.info/q/addressbalance/{}?confirmations=1'.format(key.address()))
-                        key_list.write(code + '\n')
+                        key_list.write(f"{code}:Bal({req.json()})\n")
                         print("booty found!: {} satoshi contained in key {}".format(req.json(), code))
                     except (AssertionError, AttributeError, IndexError, ValueError) as e:
                         print("Address lookup error: {}".format(e))
